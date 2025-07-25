@@ -1,0 +1,36 @@
+name: myapp # 'Name' лучше писать с маленькой буквы
+
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+
+environment:
+  sdk: '>=3.0.0 <4.0.0' # ОБНОВИТЕ: Это более актуальный диапазон SDK для Flutter.
+                       # После 'flutter upgrade', ваш SDK будет в этом диапазоне.
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # --- АКТУАЛЬНЫЕ ВЕРСИИ ДЛЯ FIREBASE (Июль 2025) ---
+  firebase_core: ^2.25.0  # Проверьте на pub.dev на самую свежую 2.x.x (или 3.x.x, если уже вышла)
+  cloud_firestore: ^4.13.6 # Проверьте на pub.dev самую свежую 4.x.x (или 5.x.x, если уже вышла)
+  firebase_auth: ^4.16.0  # Проверьте на pub.dev самую свежую 4.x.x (или 5.x.x, если уже вышла)
+  # --- КОНЕЦ ОБНОВЛЕННЫХ FIREBASE СТРОК ---
+
+
+dev_dependencies:
+  flutter_test:
+  flutter_lints: ^5.0.0 # Возможно, уже ^6.0.0 на pub.dev
+
+
+flutter:
+  uses-material-design: true
+
