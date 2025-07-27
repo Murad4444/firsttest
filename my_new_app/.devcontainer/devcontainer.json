@@ -1,27 +1,7 @@
-  "name": "Flutter Development",
+{
+  "name": "Flutter Development (Manual Setup)",
   "image": "mcr.microsoft.com/devcontainers/universal:latest",
-  "features": {
-    "ghcr.io/devcontainers/features/flutter:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/java:1": {
-      "version": "17"
-    },
-    "ghcr.io/devcontainers/features/android-sdk:1": {
-      "version": "latest",
-      "buildTools": "latest",
-      "platforms": "android-34",
-      "components": [
-        "platform-tools",
-        "cmdline-tools;latest"
-      ],
-      "additionalSdkPackages": [
-        "emulator",
-        "system-images;android-34;google_apis;x86_64"
-      ]
-    }
-  },
-  "postCreateCommand": "flutter doctor --android-licenses && flutter doctor",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y unzip curl git openjdk-17-jdk",
   "customizations": {
     "vscode": {
       "extensions": [
