@@ -1,12 +1,67 @@
+// .devcontainer/devcontainer.json
 {
-  "name": "Flutter Development (Manual Setup)",
-  "image": "mcr.microsoft.com/devcontainers/universal:latest",
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y unzip curl git openjdk-17-jdk",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "Dart-Code.flutter"
-      ]
+    "name": "Flutter Development Environment",
+    "image": "mcr.microsoft.com/devcontainers/universal:latest", // Базовый образ для универсальной разработки
+
+    "features": {
+        // Добавляем полезные утилиты и Git
+        "ghcr.io/devcontainers/features/common-utils:2": {},
+        "ghcr.io/devcontainers/features/git:1": {}
+        // "ghcr.io/devcontainers/features/docker-in-docker:2": {} // Может понадобиться для эмуляторов (ADV), но не для самой установки SDK
+    },
+
+    // Команды, которые выполняются ПОСЛЕ создания контейнера.
+    // Это будет происходить каждый раз при создании/пересборке Codespace.
+    "postCreateCommand": [
+        "echo \"--- Начинаем автоматическую настройку Flutter и Android SDK ---\"",
+        "sudo apt-get update -y",
+        "sudo apt-get install -y openjdk-17-jdk curl unzip wget libgtk-3-dev ninja-build", // Установка всех необходимых зависимостей
+
+        "echo \"--- Установка Flutter SDK ---\"",
+        "sudo git clone https://github.com/flutter/flutter.git /usr/local/flutter",
+        // $(whoami) автоматически подставит имя вашего текущего пользователя (например, codespace)
+        "sudo chown -R $(whoami):$(whoami) /usr/local/flutter", // Устанавливаем текущего пользователя владельцем папки Flutter
+        // На этом этапе flutter_test еще не будет найден, т.к. pub get не запускался для проекта
+        // Но flutter precache подготовит основные артефакты
+        "/usr/local/flutter/bin/flutter precache",
+
+        "echo \"--- Установка Android SDK Command-line Tools ---\"",
+        "sudo mkdir -p /usr/local/android-sdk/cmdline-tools/latest",
+        "sudo wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O /usr/local/android-sdk/tools.zip",
+        "sudo unzip /usr/local/android-sdk/tools.zip -d /usr/local/android-sdk/temp_extracted",
+        "sudo mv /usr/local/android-sdk/temp_extracted/cmdline-tools/* /usr/local/android-sdk/cmdline-tools/latest/",
+        "sudo rm -rf /usr/local/android-sdk/temp_extracted",
+        "sudo rm /usr/local/android-sdk/tools.zip",
+        "sudo chown -R $(whoami):$(whoami) /usr/local/android-sdk", // Устанавливаем текущего пользователя владельцем папки Android SDK
+
+        "echo \"--- Настройка переменных окружения Android (постоянно) ---\"",
+        // Создаем скрипт, который будет устанавливать переменные окружения для каждого сеанса
+        // /etc/profile.d/ - это стандартное место для таких скриптов в Linux
+        "echo 'export ANDROID_HOME=\"/usr/local/android-sdk\"' | sudo tee /etc/profile.d/android-sdk.sh",
+        "echo 'export PATH=\"$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools\"' | sudo tee -a /etc/profile.d/android-sdk.sh",
+        "sudo chmod +x /etc/profile.d/android-sdk.sh", // Делаем скрипт исполняемым
+
+        "echo \"--- Конфигурация Flutter: указываем путь к Android SDK ---\"",
+        // Убедимся, что Flutter знает, где SDK, используя полный путь
+        "/usr/local/flutter/bin/flutter config --android-sdk /usr/local/android-sdk",
+
+        "echo \"--- Первая проверка flutter doctor после автоматической настройки ---\"",
+        // Запускаем doctor для диагностики.
+        "/usr/local/flutter/bin/flutter doctor",
+        "echo \"--- АВТОМАТИЧЕСКАЯ НАСТРОЙКА ЗАВЕРШЕНА. ---\"",
+        "echo \"*** ВАЖНО: После завершения сборки Codespace, пожалуйста, вручную выполните: ***\"",
+        "echo \"*** flutter doctor --android-licenses ***\"",
+        "echo \"*** и введите 'y' для принятия лицензий. Это потребуется ОДИН раз для этого Codespace. ***\""
+    ],
+
+    // Запускаем как обычный пользователь, чтобы избежать проблем с root-правами при разработке
+    "remoteUser": "codespace", // Убедитесь, что это имя вашего пользователя в Codespaces
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Дополнительные настройки VS Code для терминала, если нужно
+                "terminal.integrated.defaultProfile.linux": "bash"
+            }
+        }
     }
-  }
 }
