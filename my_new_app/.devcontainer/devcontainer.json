@@ -34,12 +34,11 @@
         "sudo rm /usr/local/android-sdk/tools.zip",
         "sudo chown -R $(whoami):$(whoami) /usr/local/android-sdk", // Устанавливаем текущего пользователя владельцем папки Android SDK
 
-        "echo \"--- Настройка переменных окружения Android (постоянно) ---\"",
-        // Создаем скрипт, который будет устанавливать переменные окружения для каждого сеанса
-        // /etc/profile.d/ - это стандартное место для таких скриптов в Linux
-        "echo 'export ANDROID_HOME=\"/usr/local/android-sdk\"' | sudo tee /etc/profile.d/android-sdk.sh",
-        "echo 'export PATH=\"$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools\"' | sudo tee -a /etc/profile.d/android-sdk.sh",
-        "sudo chmod +x /etc/profile.d/android-sdk.sh", // Делаем скрипт исполняемым
+        "echo \"--- Настройка переменных окружения Android (постоянно в .bashrc) ---\"",
+        // Добавляем переменные окружения напрямую в ~/.bashrc пользователя codespace.
+        // Это наиболее надежный способ для интерактивных терминалов в Codespaces.
+        "echo 'export ANDROID_HOME=\"/usr/local/android-sdk\"' >> /home/$(whoami)/.bashrc",
+        "echo 'export PATH=\"$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools\"' >> /home/$(whoami)/.bashrc",
 
         "echo \"--- Конфигурация Flutter: указываем путь к Android SDK ---\"",
         // Убедимся, что Flutter знает, где SDK, используя полный путь
@@ -53,7 +52,7 @@
         "echo \"*** flutter doctor --android-licenses ***\"",
         "echo \"*** и введите 'y' для принятия лицензий. Это потребуется ОДИН раз для этого Codespace. ***\""
     ],
-
+    
     // Запускаем как обычный пользователь, чтобы избежать проблем с root-правами при разработке
     "remoteUser": "codespace", // Убедитесь, что это имя вашего пользователя в Codespaces
     "customizations": {
