@@ -1,0 +1,20 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - name: Build
+        run: |
+          cd pozdravleniya
+          flutter pub get
+          flutter build apk --debug
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-apk
+          path: pozdravleniya/build/app/outputs/flutter-apk/app-debug.apk
