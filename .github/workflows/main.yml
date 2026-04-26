@@ -1,0 +1,16 @@
+name: Move Files
+on: workflow_dispatch
+jobs:
+  move:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          mv my_new_app/* . || true
+          mv my_new_app/.* . || true
+          rmdir my_new_app || true
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Moved to root"
+          git push
