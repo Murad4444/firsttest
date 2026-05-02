@@ -145,7 +145,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               const Text(
-                'Səlam! Zəhmət olmasa qeydiyyatdan keçin.',
+                'Salam! Zəhmət olmasa qeydiyyatdan keçin.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
