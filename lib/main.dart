@@ -344,7 +344,7 @@ class _MainScreenState extends State<MainScreen> {
 
   // Список типов одежды и соответствующих им замеров
   final Map<String, List<String>> _garmentMeasurements = {
-    'T-şin': ['chest', 'waist'], // Футболка (грудь, талия)
+    'T-şirt': ['chest', 'waist'], // Футболка (грудь, талия)
     'Şalvar': [
       'waist',
       'hips',
@@ -357,7 +357,7 @@ class _MainScreenState extends State<MainScreen> {
       'hips',
       'length',
     ], // Платье (грудь, талия, бедра, длина)
-    'Etek': ['waist', 'hips', 'length'], // Юбка (талия, бедра, длина)
+    'Ətək': ['waist', 'hips', 'length'], // Юбка (талия, бедра, длина)
     'Uzun qol': [
       'chest',
       'waist',
@@ -443,7 +443,7 @@ class _MainScreenState extends State<MainScreen> {
               controller: _designDescriptionController,
               decoration: const InputDecoration(
                 labelText:
-                    'Məsələn: Krujevalı uzun gecə donu', // "Например: Длинное вечернее платье с кружевами"
+                    'Məsələn: Üstündə zərlər olsun.', // "Например: Длинное вечернее платье с кружевами"
                 border: OutlineInputBorder(),
               ),
               maxLines: 3,
