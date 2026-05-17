@@ -20,16 +20,16 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # --- АКТУАЛЬНЫЕ ВЕРСИИ ДЛЯ FIREBASE (Июль 2025) ---
-  firebase_core: ^2.25.0  # Проверьте на pub.dev на самую свежую 2.x.x (или 3.x.x, если уже вышла)
-  cloud_firestore: ^4.13.6 # Проверьте на pub.dev самую свежую 4.x.x (или 5.x.x, если уже вышла)
-  firebase_auth: ^4.16.0  # Проверьте на pub.dev самую свежую 4.x.x (или 5.x.x, если уже вышла)
+  firebase_core: ^4.9.0  # Проверьте на pub.dev на самую свежую 2.x.x (или 3.x.x, если уже вышла)
+  cloud_firestore: ^6.4.1 # Проверьте на pub.dev самую свежую 4.x.x (или 5.x.x, если уже вышла)
+  firebase_auth: ^6.5.1  # Проверьте на pub.dev самую свежую 4.x.x (или 5.x.x, если уже вышла)
   # --- КОНЕЦ ОБНОВЛЕННЫХ FIREBASE СТРОК ---
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter  # ЭТО САМАЯ ВАЖНАЯ СТРОЧКА!
-  flutter_lints: ^3.0.0
+  flutter_lints: ^6.0.0
 
 
 flutter:

@@ -1,7 +1,7 @@
 // android/build.gradle.kts
 
 buildscript {
-    val kotlin_version by extra("1.8.20") // <-- Здесь правильно
+    val kotlin_version by extra("2.2.0")
     repositories {
         google()
         mavenCentral()

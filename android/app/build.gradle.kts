@@ -1,13 +1,12 @@
-Plugins {
+plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
-    id("com.google.gms.google-services") // <<--- Эта строка добавлена для Firebase
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.myapp" // <<--- Проверьте это значение! Должно совпадать с Firebase Console (сейчас com.example.myapp)
+    namespace = "com.example.myapp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -17,14 +16,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = "11"
     }
 
     defaultConfig {
-        applicationId = "com.example.myapp" // <<--- Проверьте это значение! Должно совпадать с Firebase Console (сейчас com.example.myapp)
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 23
+        applicationId = "com.example.myapp"
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -32,8 +29,6 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -43,11 +38,11 @@ flutter {
     source = "../.."
 }
 
-dependencies { // <<--- Этот блок dependencies добавлен для Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.8.0")) // <<--- Используйте актуальную версию Firebase BOM
-    implementation("com.google.firebase:firebase-analytics-ktx") // Добавлено для аналитики
-    implementation("com.google.firebase:firebase-firestore-ktx") // <<--- Добавлено для Firestore
-    // Если вам понадобятся другие сервисы Firebase, добавляйте их здесь, например:
-     implementation("com.google.firebase:firebase-auth-ktx") // Для аутентификации
-     implementation("com.google.firebase:firebase-storage-ktx") // Для Cloud Storage
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-storage")
 }
