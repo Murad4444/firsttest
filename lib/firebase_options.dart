@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -52,11 +40,47 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAkcgL2wKRHWAQeDsCEr-sWuvervvpbTv0',
+    appId: '1:128383511539:web:4c04808b2b608220bbc086',
+    messagingSenderId: '128383511539',
+    projectId: 'leylaninpaltarlariapp',
+    authDomain: 'leylaninpaltarlariapp.firebaseapp.com',
+    storageBucket: 'leylaninpaltarlariapp.firebasestorage.app',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyATLIXyMnQGXSyi4oNpyn6SGnCuSTR3Bq0',
     appId: '1:128383511539:android:5e0948ecb4796465bbc086',
     messagingSenderId: '128383511539',
     projectId: 'leylaninpaltarlariapp',
+    storageBucket: 'leylaninpaltarlariapp.firebasestorage.app',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCCCGlaR71oG1rbZ5Y-a10J_TUt7NC_glk',
+    appId: '1:128383511539:ios:abc093ed6b1b52dbbbc086',
+    messagingSenderId: '128383511539',
+    projectId: 'leylaninpaltarlariapp',
+    storageBucket: 'leylaninpaltarlariapp.firebasestorage.app',
+    iosBundleId: 'com.example.myNewApp',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCCCGlaR71oG1rbZ5Y-a10J_TUt7NC_glk',
+    appId: '1:128383511539:ios:abc093ed6b1b52dbbbc086',
+    messagingSenderId: '128383511539',
+    projectId: 'leylaninpaltarlariapp',
+    storageBucket: 'leylaninpaltarlariapp.firebasestorage.app',
+    iosBundleId: 'com.example.myNewApp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBrWDLG-yB1sA29aqg-xAE_yOwYcCyRMIU',
+    appId: '1:128383511539:web:803cf392eb0d119bbbc086',
+    messagingSenderId: '128383511539',
+    projectId: 'leylaninpaltarlariapp',
+    authDomain: 'leylaninpaltarlariapp.firebaseapp.com',
     storageBucket: 'leylaninpaltarlariapp.firebasestorage.app',
   );
 }
